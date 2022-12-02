@@ -33,9 +33,7 @@ const list = async () => {
 
         await checkIfFolderExists();
 
-        const filesArray = await readdir(FOLDER_URL)
-
-        for (const file of filesArray) {
+        for (const file of await readdir(FOLDER_URL)) {
 
             console.log(file);
 
