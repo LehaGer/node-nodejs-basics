@@ -1,9 +1,8 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { release, version } from 'os';
-import { createServer as createServerHttp } from 'http';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { release, version } from 'node:os';
+import { createServer as createServerHttp } from 'node:http';
 import { readFile } from 'fs/promises';
-import './files/c.js';
 import './files/c.js';
 
 const unknownObject = Math.random() > .5
