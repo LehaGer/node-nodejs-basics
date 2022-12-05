@@ -1,5 +1,11 @@
+import { fork } from "node:child_process";
+
+const SCRIPT_URL = new URL('./files/script.js', import.meta.url);
+
 const spawnChildProcess = async (args) => {
-    // Write your code here
+
+    fork(SCRIPT_URL, args);
+
 };
 
 spawnChildProcess();
