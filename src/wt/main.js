@@ -11,31 +11,34 @@ const performCalculations = async () => {
 
     cpuCores.forEach((_, index, array) => {
 
-        let result,
-            status = 'resolved';
-
         const wt = new Worker(WORKER_FILE_URL, {
             workerData: INITIAL_INPUT_VALUE++
         });
 
+        let resultObj = {
+            status: undefined,
+            result: undefined,
+        };
+
         wt.on('message', msg => {
 
             if(msg?.type === 'computedValue') {
-                result = msg?.payload;
+
+                resultObj.status = 'resolved';
+                resultObj.result = msg?.payload;
+
             }
 
         });
         wt.on('error', () => {
 
-            status = 'error';
+            resultObj.status = 'error';
+            resultObj.result = null;
 
         });
         wt.on('exit', () => {
 
-            resultingArray[index] = {
-                status: status,
-                data: result,
-            };
+            resultingArray[index] = resultObj;
 
             if(resultingArray.filter(el => !!el).length === array.length) {
                 console.log(resultingArray);
